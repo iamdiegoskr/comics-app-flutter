@@ -1,4 +1,4 @@
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -6,19 +6,9 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        actions: [
-          IconButton(onPressed: () async{
-              FirebaseAuth auth = FirebaseAuth.instance;
-              await auth.signOut();
-              Navigator.pushNamed(context, 'verify');
-          }, icon: Icon(Icons.logout))
-        ],
-        title: Text('Welcome'),
-      ),
+    return const Scaffold(
       body: Center(
-        child: Text('Home welcome'),
+        child: Text('Bienvenido a mi app de comics'),
       ),
     );
   }

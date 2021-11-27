@@ -1,7 +1,7 @@
 
 import 'package:comics_skr_app/screens/home_screen.dart';
 import 'package:comics_skr_app/screens/login_screen_user.dart';
-import 'package:comics_skr_app/screens/verify_user.dart';
+import 'package:comics_skr_app/screens/auth_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -19,11 +19,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Material App',
-      initialRoute: 'verify',
+      initialRoute: 'auth',
       routes: {
-        'verify':(_)=> const VerifyUser(),
+        'auth':(_)=> const AuthScreen(),
         'home': (_) => const HomeScreen(),
-        'login' :(_)=> const LoginScreenAnonymus()
+        'login' :(_)=> LoginScreenAnonymus()
       },
     );
   }

@@ -22,7 +22,11 @@ class _AuthScreenState extends State<AuthScreen> {
 
         return Scaffold(
           appBar: AppBar(
-            title: const Text('Firebase auth'),
+            elevation: 0,
+            title: const Image(
+                width: 80,
+                image: AssetImage('assets/marvelappbar.png')
+            ),
             actions: [
               if(snapshot.data!=null)
                 IconButton(onPressed: ()=> _authService.signOutAnonymus() , icon: const Icon(Icons.exit_to_app))

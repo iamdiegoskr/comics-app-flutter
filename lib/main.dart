@@ -18,6 +18,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        brightness: Brightness.dark,
+        primaryColor: const Color(0xffDA3B62)
+      ),
       title: 'Material App',
       initialRoute: 'auth',
       routes: {

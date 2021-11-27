@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "815020469883",
+    "project_id": "comicsskeitapp",
+    "storage_bucket": "comicsskeitapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:815020469883:android:7226b85e16e5508f103cde",
+        "android_client_info": {
+          "package_name": "com.skr.comics_skr_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "815020469883-90ou76q3r5068uk57jj4i3gl3lh3tofc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDCFlsl1sbhwN15ek2qH1q5ubUSzNAQBFA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "815020469883-90ou76q3r5068uk57jj4i3gl3lh3tofc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

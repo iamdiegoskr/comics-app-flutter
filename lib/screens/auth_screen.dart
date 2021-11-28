@@ -20,6 +20,8 @@ class _AuthScreenState extends State<AuthScreen> {
       stream: _authService.user,
       builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
 
+        final user = snapshot.data;
+
         return Scaffold(
           appBar: AppBar(
             elevation: 0,
@@ -32,7 +34,7 @@ class _AuthScreenState extends State<AuthScreen> {
                 IconButton(onPressed: ()=> _authService.signOutAnonymus() , icon: const Icon(Icons.exit_to_app))
             ],
           ),
-          body: snapshot.data!=null? const HomeScreen() :  LoginScreenAnonymus()
+          body: user!=null? const HomeScreen() :  LoginScreenAnonymus()
 
         );
       },

@@ -1,4 +1,5 @@
 
+import 'package:comics_skr_app/screens/detail_comic_screen.dart';
 import 'package:comics_skr_app/screens/home_screen.dart';
 import 'package:comics_skr_app/screens/login_screen_user.dart';
 import 'package:comics_skr_app/screens/auth_screen.dart';
@@ -22,12 +23,18 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.dark,
         primaryColor: const Color(0xffDA3B62)
       ),
+      // theme: ThemeData.dark().copyWith(
+      //   appBarTheme: AppBarTheme(
+      //     color: Colors.red
+      //   )
+      // ),
       title: 'Material App',
       initialRoute: 'auth',
       routes: {
         'auth':(_)=> const AuthScreen(),
         'home': (_) => const HomeScreen(),
-        'login' :(_)=> LoginScreenAnonymus()
+        'login' :(_)=> LoginScreenAnonymus(),
+        'detail': (_) => const DetailComic()
       },
     );
   }

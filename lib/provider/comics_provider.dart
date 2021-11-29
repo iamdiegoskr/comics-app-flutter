@@ -34,21 +34,13 @@ class ComicsProvider extends ChangeNotifier{
   }
 
   getAllComics() async{
-
-    //final responseData = await _getJsonData('v1/public/comics');
-    print('Obteniendo todo los comics');
+    print('Obteniendo los comics');
     final responseData = await _getJsonData('v1/public/comics');
-
-    //print(responseData);
 
     var jsonResponse =
         convert.jsonDecode(responseData) as Map<String, dynamic>;
 
-    // var comics = jsonResponse['results'];
-
-    listComics = jsonResponse['data']['results'];
-    // print(listComics);
-    print(listComics[12]['title']);
+    return jsonResponse['data']['results'];
 
   }
 

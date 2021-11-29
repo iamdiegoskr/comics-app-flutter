@@ -13,14 +13,16 @@ class _HomeScreenState extends State<HomeScreen> {
 
   int currentPage = 0;
 
-  static const List<Widget> _widgetOptions = <Widget>[
-    ComicsPage(),
-    GamesPage(),
-    FavoritesPage()
-  ];
-
   @override
   Widget build(BuildContext context) {
+
+    const List<Widget> _widgetOptions = <Widget>[
+      ComicsPage(),
+      GamesPage(),
+      FavoritesPage()
+    ];
+
+
     return Scaffold(
       body:  _widgetOptions.elementAt(currentPage),
       bottomNavigationBar: BottomNavigationBar(

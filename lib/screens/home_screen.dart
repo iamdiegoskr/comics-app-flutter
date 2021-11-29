@@ -1,5 +1,7 @@
+import 'package:comics_skr_app/provider/comics_provider.dart';
 import 'package:comics_skr_app/screens/screens.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 
 class HomeScreen extends StatefulWidget {
@@ -16,10 +18,12 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
 
-    const List<Widget> _widgetOptions = <Widget>[
-      ComicsPage(),
-      GamesPage(),
-      FavoritesPage()
+    ComicsProvider _comicsProvider = Provider.of<ComicsProvider>(context);
+
+      List<Widget> _widgetOptions = <Widget>[
+      ComicsPage(comics:_comicsProvider.listComics),
+      const GamesPage(),
+      const FavoritesPage()
     ];
 
 

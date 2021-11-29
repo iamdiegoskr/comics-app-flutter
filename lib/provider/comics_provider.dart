@@ -1,3 +1,5 @@
+import 'package:comics_skr_app/models/comic.dart';
+import 'package:comics_skr_app/models/comics_response.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
@@ -10,7 +12,7 @@ class ComicsProvider extends ChangeNotifier{
   String apikey = 'ae1d2b5c0b8d73ae295e212eaae5090e';
   String hash = '89ddd3f5aa47a68f8e70d9c8596d2a0a';
 
-  List<dynamic> listComics = [];
+  List<Comic> listComics = [];
 
 
   ComicsProvider(){
@@ -35,12 +37,12 @@ class ComicsProvider extends ChangeNotifier{
 
   getAllComics() async{
     print('Obteniendo los comics');
+
     final responseData = await _getJsonData('v1/public/comics');
+    final comicsResponse = ComicsResponse.fromJson(responseData);
 
-    var jsonResponse =
-        convert.jsonDecode(responseData) as Map<String, dynamic>;
-
-    return jsonResponse['data']['results'];
+    listComics = comicsResponse.data.results;
+    notifyListeners();
 
   }
 

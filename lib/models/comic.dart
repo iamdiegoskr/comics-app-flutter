@@ -62,4 +62,9 @@ class Comic {
         characters: Characters.fromMap(json["characters"]),
     );
 
+
+    getFullPosterComic(){
+      return '${thumbnail.path}.jpg';
+    }
+
 }

@@ -1,30 +1,35 @@
+import 'package:comics_skr_app/models/comic.dart';
 import 'package:flutter/material.dart';
 
 class CardComic extends StatelessWidget {
 
-  const CardComic({Key? key}) : super(key: key);
+  final Comic comic;
+
+  const CardComic({Key? key, required this.comic}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
 
+    comic.getFullPosterComic();
+
     return GestureDetector(
       onTap: ()=> Navigator.pushNamed(context, 'detail'),
       child: Container(
-          padding: const EdgeInsets.all(8),
+          padding: const EdgeInsets.all(4),
           child: Column(
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(12),
                 child: FadeInImage.assetNetwork(
                   width: double.infinity,
-                  height: 150,
+                  height: 165,
                   fit: BoxFit.cover,
                   placeholder: 'assets/spinning-loading.gif',
-                  image: 'https://via.placeholder.com/200x300'
+                  image: comic.getFullPosterComic(),
                 ),
               ),
               const SizedBox(height: 12),
-              const Text('Title.comic',
+              Text(comic.title,
                 textAlign: TextAlign.center,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 2,

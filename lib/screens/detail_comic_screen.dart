@@ -1,22 +1,46 @@
+
+import 'package:comics_skr_app/models/comic.dart';
 import 'package:comics_skr_app/widgets/card_swiper.dart';
 import 'package:flutter/material.dart';
 
-class DetailComic extends StatelessWidget {
+class DetailComic extends StatefulWidget {
   const DetailComic({Key? key}) : super(key: key);
 
   @override
+  State<DetailComic> createState() => _DetailComicState();
+}
+
+class _DetailComicState extends State<DetailComic> {
+  bool isFavorite = false;
+
+  @override
   Widget build(BuildContext context) {
+
+
+    final comic = ModalRoute.of(context)!.settings.arguments as Comic;
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
         title: const Text('Detalle del comic'),
+        actions: [
+          IconButton(
+            onPressed: (){
+              setState(() {
+                isFavorite = !isFavorite;
+              });
+            },
+            icon: (!isFavorite)
+              ? const Icon(Icons.favorite_border, color: Colors.pink, size: 34)
+              : const Icon(Icons.favorite, color: Colors.pink, size: 34))
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
-          children: const [
-            CardSwiperComics(),
-            TitleComic(),
-            ContentComic(),
+          children: [
+            CardSwiperComics(posters:comic.images),
+            TitleComic(comic.title),
+            ContentComic(comic:comic),
           ],
         ),
       )
@@ -25,17 +49,19 @@ class DetailComic extends StatelessWidget {
 }
 
 class TitleComic extends StatelessWidget {
-  const TitleComic({
-    Key? key,
-  }) : super(key: key);
+
+  final String title;
+
+  const TitleComic(this.title, {Key? key}) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(12),
-      child: const Text(
-        'Titulo del comic',
-        style: TextStyle(
+      child: Text(
+        title,
+        style: const TextStyle(
           fontSize: 22,
           fontWeight: FontWeight.bold
         ),
@@ -47,7 +73,12 @@ class TitleComic extends StatelessWidget {
 
 
 class ContentComic extends StatelessWidget {
-  const ContentComic({Key? key}) : super(key: key);
+
+  final Comic comic;
+
+  const ContentComic(
+    {Key? key,
+    required this.comic}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -59,12 +90,12 @@ class ContentComic extends StatelessWidget {
       ),
       width: double.infinity,
       child: Column(
-        children: const [
-          ComicDescription(),
-          Divider(
+        children: [
+          ComicDescription(comic.description),
+          const Divider(
             color: Colors.white,
           ),
-          ContentDetails(),
+          ContentDetails(comic),
         ],
       ),
     );
@@ -72,41 +103,85 @@ class ContentComic extends StatelessWidget {
 }
 
 class ComicDescription extends StatelessWidget {
-  const ComicDescription({
-    Key? key,
-  }) : super(key: key);
+
+  String? description;
+
+  ComicDescription(this.description, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+
+  return Container(
       padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-      child: const Text(
-        'Aute exercitation eu exercitation et elit nisi aliqua aute. Pariatur non ullamco anim dolor eiusmod. Irure nisi commodo magna incididunt. Adipisicing laboris eu sit officia excepteur laborum culpa pariatur cupidatat. Sint excepteur consequat nulla cillum ut mollit incididunt in consectetur esse sunt fugiat.',
-        textAlign: TextAlign.justify,
-      )
+      child: (description!=null || description=='') ? Text(description!) : const Text('Descripcion no disponible...')
     );
   }
 }
 
 
 class ContentDetails extends StatelessWidget {
-  const ContentDetails({Key? key}) : super(key: key);
+
+  final Comic comic;
+
+  const ContentDetails(this.comic,{Key? key}) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
+
     return Container(
       padding: const EdgeInsets.all(18),
       width: double.infinity,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
-          Text('Fecha lanzamiento : 23.04.97'),
-          SizedBox(height: 12),
-          Text('Precio : 7.9'),
-          SizedBox(height: 12),
-          Text('Personajes')
+        children: [
+
+          DetailItem(
+            title:'Fecha de lanzamiento',
+            child: Text(comic.dates[0].date, style: const TextStyle(fontSize: 18))
+          ),
+
+          DetailItem(
+            title:'Precio',
+            child: Row(
+              children: [
+                Text(comic.prices[0].price.toString(), style: const TextStyle(fontSize: 18),),
+                const Icon(Icons.attach_money, color: Colors.greenAccent, size: 32),
+              ],
+            )
+          ),
+
         ],
       ),
+    );
+  }
+}
+
+
+class DetailItem extends StatelessWidget {
+
+  final String title;
+  final Widget child;
+
+  const DetailItem({ required  this.title, required this.child});
+
+  @override
+  Widget build(BuildContext context) {
+
+    const textTitleDetails = TextStyle(
+        fontSize: 22,
+        fontWeight: FontWeight.bold,
+        letterSpacing: 2,
+        color: Colors.orange
+    );
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(title, style: textTitleDetails),
+        child,
+        const SizedBox(height: 14,)
+      ],
     );
   }
 }

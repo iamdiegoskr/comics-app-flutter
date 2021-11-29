@@ -13,7 +13,7 @@ class CardComic extends StatelessWidget {
     comic.getFullPosterComic();
 
     return GestureDetector(
-      onTap: ()=> Navigator.pushNamed(context, 'detail'),
+      onTap: ()=> Navigator.pushNamed(context, 'detail', arguments: comic),
       child: Container(
           padding: const EdgeInsets.all(4),
           child: Column(

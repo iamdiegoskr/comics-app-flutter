@@ -28,6 +28,20 @@ class CardSwiperComics extends StatelessWidget {
       );
     }
 
+
+    if(posters.length==1){
+      return Container(
+        padding: const EdgeInsets.all(0),
+        width: double.infinity,
+        height: size.height * 0.7,
+        child: FadeInImage.assetNetwork(
+          fit: BoxFit.cover,
+          placeholder: 'assets/not-image.jpg',
+          image: '${posters[0].path}.jpg',
+        )
+      );
+    }
+
     return Container(
       padding: const EdgeInsets.all(0),
       width: double.infinity,

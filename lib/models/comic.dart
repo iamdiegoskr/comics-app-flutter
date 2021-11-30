@@ -41,6 +41,7 @@ class Comic {
     List<Thumbnail> images;
     Creators creators;
     Characters characters;
+    bool? isFavorite;
 
     factory Comic.fromJson(String str) => Comic.fromMap(json.decode(str));
 

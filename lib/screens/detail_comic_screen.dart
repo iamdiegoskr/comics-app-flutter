@@ -11,13 +11,14 @@ class DetailComic extends StatefulWidget {
 }
 
 class _DetailComicState extends State<DetailComic> {
-  bool isFavorite = false;
 
   @override
   Widget build(BuildContext context) {
 
 
     final comic = ModalRoute.of(context)!.settings.arguments as Comic;
+
+    comic.isFavorite = false;
 
     return Scaffold(
       appBar: AppBar(
@@ -27,10 +28,10 @@ class _DetailComicState extends State<DetailComic> {
           IconButton(
             onPressed: (){
               setState(() {
-                isFavorite = !isFavorite;
+                comic.isFavorite = !comic.isFavorite!;
               });
             },
-            icon: (!isFavorite)
+            icon: (!comic.isFavorite!)
               ? const Icon(Icons.favorite_border, color: Colors.pink, size: 34)
               : const Icon(Icons.favorite, color: Colors.pink, size: 34))
         ],

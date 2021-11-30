@@ -1,5 +1,6 @@
 import 'package:comics_skr_app/provider/comics_provider.dart';
 import 'package:comics_skr_app/screens/screens.dart';
+import 'package:comics_skr_app/services/comics_favorites.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -19,11 +20,12 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
 
     ComicsProvider _comicsProvider = Provider.of<ComicsProvider>(context);
+    ComicsFavoriteService _comicsFavoriteService = Provider.of<ComicsFavoriteService>(context);
 
       List<Widget> _widgetOptions = <Widget>[
       ComicsPage(comics:_comicsProvider.listComics),
       const GamesPage(),
-      const FavoritesPage()
+      FavoritesPage(favorites:_comicsFavoriteService.listComicsFavorites)
     ];
 
 

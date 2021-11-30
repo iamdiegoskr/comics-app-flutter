@@ -4,6 +4,7 @@ import 'package:comics_skr_app/screens/detail_comic_screen.dart';
 import 'package:comics_skr_app/screens/home_screen.dart';
 import 'package:comics_skr_app/screens/login_screen_user.dart';
 import 'package:comics_skr_app/screens/auth_screen.dart';
+import 'package:comics_skr_app/services/comics_favorites.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -23,6 +24,7 @@ class AppState extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_)=> ComicsProvider(), lazy: false),
+        ChangeNotifierProvider(create: (_)=> ComicsFavoriteService())
       ],
       child: const MyApp(),
     );

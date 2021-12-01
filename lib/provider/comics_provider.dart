@@ -2,7 +2,6 @@ import 'package:comics_skr_app/models/comic.dart';
 import 'package:comics_skr_app/models/comics_response.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert' as convert;
 
 class ComicsProvider extends ChangeNotifier{
 //Mi provedor de informacion..

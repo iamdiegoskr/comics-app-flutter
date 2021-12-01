@@ -27,7 +27,6 @@ class _DetailComicState extends State<DetailComic> {
 
 
     final comic = ModalRoute.of(context)!.settings.arguments as Comic;
-    comic.isFavorite = false;
 
     return Scaffold(
       appBar: AppBar(
@@ -92,9 +91,7 @@ class _ContentComicState extends State<ContentComic> {
           const SizedBox(height: 12,),
           IconButton(
             onPressed: (){
-
                 setState(() {
-
                   isFavorited = !isFavorited;
 
                   if (isFavorited) {

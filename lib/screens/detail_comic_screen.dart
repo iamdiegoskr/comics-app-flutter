@@ -1,4 +1,6 @@
 
+import 'dart:developer';
+
 import 'package:comics_skr_app/models/comic.dart';
 import 'package:comics_skr_app/models/comic_favorite.dart';
 import 'package:comics_skr_app/services/comics_favorites.dart';
@@ -50,7 +52,7 @@ class _DetailComicState extends State<DetailComic> {
 
 
 
-class ContentComic extends StatelessWidget {
+class ContentComic extends StatefulWidget {
 
   final Comic comic;
 
@@ -59,9 +61,25 @@ class ContentComic extends StatelessWidget {
     required this.comic}) : super(key: key);
 
   @override
+  State<ContentComic> createState() => _ContentComicState();
+}
+
+class _ContentComicState extends State<ContentComic> {
+
+    late bool isFavorited;
+
+    @override
+    void initState() {
+      isFavorited = false;
+      super.initState();
+    }
+
+  @override
   Widget build(BuildContext context) {
 
     ComicsFavoriteService comicsFavoriteService = Provider.of<ComicsFavoriteService>(context);
+
+    isFavorited = comicIsFavorited(comicsFavoriteService.listComicsFavorites, widget.comic.id);
 
     return Container(
       padding: const EdgeInsets.only(
@@ -72,21 +90,22 @@ class ContentComic extends StatelessWidget {
       width: double.infinity,
       child: Column(
         children: [
-          TitleComic(comic.title),
+          TitleComic(widget.comic.title),
           const SizedBox(height: 12,),
           IconButton(
             onPressed: (){
-
-              final comicFavorite = ComicFavorite(id: comic.id, path: comic.getFullPosterComic(), title: comic.title);
-              comicsFavoriteService.addComicFavorite(comicFavorite);
-
-            }, icon: const Icon(Icons.favorite_border_outlined, size: 36, color: Colors.pink, )
+              print(isFavorited);
+              // final comicFavorite = ComicFavorite(id: widget.comic.id, path: widget.comic.getFullPosterComic(), title: widget.comic.title);
+              // comicsFavoriteService.addComicFavorite(comicFavorite);
+            }, icon: (isFavorited)
+              ? const Icon(Icons.favorite, size: 36, color: Colors.pink)
+              : const Icon(Icons.favorite_border_outlined, size: 36, color: Colors.pink)
           ),
-          ComicDescription(comic.description),
+          ComicDescription(widget.comic.description),
           const Divider(
             color: Colors.white,
           ),
-          ContentDetails(comic),
+          ContentDetails(widget.comic),
         ],
       ),
     );
@@ -198,4 +217,16 @@ class DetailItem extends StatelessWidget {
       ],
     );
   }
+}
+
+bool comicIsFavorited(List<ComicFavorite> listComicsFavorites, int id){
+
+  for (var element in listComicsFavorites) {
+    if(element.id == id){
+      return true;
+    }
+  }
+
+  return false;
+
 }

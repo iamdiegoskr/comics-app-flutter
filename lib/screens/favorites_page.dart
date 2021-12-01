@@ -24,7 +24,7 @@ class FavoritesPage extends StatelessWidget {
 
 
     if(comicsFavoriteService.listComicsFavorites.isEmpty){
-      return Center(
+      return const Center(
         child: Text('No hay comics favoritos'),
       );
     }

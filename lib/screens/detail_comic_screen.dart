@@ -1,6 +1,4 @@
 
-import 'dart:developer';
-
 import 'package:comics_skr_app/models/comic.dart';
 import 'package:comics_skr_app/models/comic_favorite.dart';
 import 'package:comics_skr_app/services/comics_favorites.dart';
@@ -94,9 +92,19 @@ class _ContentComicState extends State<ContentComic> {
           const SizedBox(height: 12,),
           IconButton(
             onPressed: (){
-              print(isFavorited);
-              // final comicFavorite = ComicFavorite(id: widget.comic.id, path: widget.comic.getFullPosterComic(), title: widget.comic.title);
-              // comicsFavoriteService.addComicFavorite(comicFavorite);
+
+                setState(() {
+
+                  isFavorited = !isFavorited;
+
+                  if (isFavorited) {
+                    final comicFavorite = ComicFavorite(id: widget.comic.id, path: widget.comic.getFullPosterComic(), title: widget.comic.title);
+                    comicsFavoriteService.addComicFavorite(comicFavorite);
+                  }else{
+                    ComicFavorite comicToRemove = getFavoritedComicToRemove(comicsFavoriteService.listComicsFavorites, widget.comic.id);
+                    comicsFavoriteService.deleteComicFavorite(comicToRemove.idFirebase!);
+                  }
+                });
             }, icon: (isFavorited)
               ? const Icon(Icons.favorite, size: 36, color: Colors.pink)
               : const Icon(Icons.favorite_border_outlined, size: 36, color: Colors.pink)
@@ -221,12 +229,22 @@ class DetailItem extends StatelessWidget {
 
 bool comicIsFavorited(List<ComicFavorite> listComicsFavorites, int id){
 
-  for (var element in listComicsFavorites) {
-    if(element.id == id){
+  for (var comic in listComicsFavorites) {
+    if(comic.id == id){
       return true;
     }
   }
 
   return false;
+
+}
+
+getFavoritedComicToRemove(List<ComicFavorite> listComicsFavorites, int id){
+
+    for (var comic in listComicsFavorites) {
+      if(comic.id == id){
+        return comic;
+      }
+    }
 
 }

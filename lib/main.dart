@@ -47,7 +47,7 @@ class MyApp extends StatelessWidget {
       //     color: Colors.red
       //   )
       // ),
-      title: 'Material App',
+      title: 'ComicsSkeit',
       initialRoute: 'auth',
       routes: {
         'auth':(_)=> const AuthScreen(),

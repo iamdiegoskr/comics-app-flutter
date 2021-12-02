@@ -3,6 +3,7 @@ import 'package:comics_skr_app/models/comic.dart';
 import 'package:comics_skr_app/models/comic_favorite.dart';
 import 'package:comics_skr_app/services/comics_favorites.dart';
 import 'package:comics_skr_app/widgets/card_swiper.dart';
+import 'package:comics_skr_app/widgets/slider_characters.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -37,8 +38,8 @@ class _DetailComicState extends State<DetailComic> {
         child: Column(
           children: [
             CardSwiperComics(posters:comic.images),
-            //TitleComic(comic.title),
             ContentComic(comic:comic),
+            CharactersSlider(comicId : comic.id)
           ],
         ),
       )

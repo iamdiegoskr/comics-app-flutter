@@ -27,8 +27,7 @@ class ComicsFavoriteService extends ChangeNotifier{
     // Await the http get response, then decode the json-formatted response.
     var response = await http.get(url);
 
-    var jsonResponse =
-        convert.jsonDecode(response.body) ?? [] as Map<String, dynamic> ;
+    var jsonResponse = convert.jsonDecode(response.body) ?? [] as Map<String, dynamic> ;
 
     jsonResponse.forEach((key, value) {
       var tempComic = ComicFavorite.fromMap(value);
@@ -63,6 +62,5 @@ class ComicsFavoriteService extends ChangeNotifier{
     getFavoritesComics();
 
   }
-
 
 }

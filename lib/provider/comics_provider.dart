@@ -19,7 +19,6 @@ class ComicsProvider extends ChangeNotifier{
 
 
   ComicsProvider(){
-    print('Comics provider initilize');
     getAllComics();
   }
 
@@ -39,7 +38,6 @@ class ComicsProvider extends ChangeNotifier{
   }
 
   getAllComics() async{
-    print('Obteniendo los comics');
 
     final responseData = await _getJsonData('v1/public/comics');
     final comicsResponse = ComicsResponse.fromJson(responseData);

@@ -12,7 +12,6 @@ class AuthService{
     try {
       UserCredential credential = await _auth.signInAnonymously();
       if(credential.user!=null){
-        print(credential.user!.uid);
         return true;
       }else{
         return false;

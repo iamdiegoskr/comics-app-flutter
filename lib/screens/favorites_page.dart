@@ -58,9 +58,16 @@ class FavoriteComicCard extends StatelessWidget {
         children: [
           ListTile(
             title: Text(comic.title),
-            leading: CircleAvatar(
-              radius: 30,
-              backgroundImage: NetworkImage(comic.path),
+            leading: GestureDetector(
+              onTap: (){
+
+                Navigator.pushNamed(context, 'detail', arguments: comic );
+
+              },
+              child: CircleAvatar(
+                radius: 30,
+                backgroundImage: NetworkImage(comic.path),
+              ),
             ),
             trailing: IconButton(
               onPressed: (){

@@ -1,4 +1,5 @@
 import 'package:comics_skr_app/models/comic_favorite.dart';
+import 'package:comics_skr_app/provider/comics_provider.dart';
 import 'package:comics_skr_app/services/comics_favorites.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -49,20 +50,19 @@ class FavoriteComicCard extends StatelessWidget {
   Widget build(BuildContext context) {
 
     ComicsFavoriteService comicsFavoriteService = Provider.of<ComicsFavoriteService>(context);
+    ComicsProvider comicsProvider = Provider.of<ComicsProvider>(context);
 
 
     return Container(
-      //margin: const EdgeInsets.all(12.0),
       padding: const EdgeInsets.all(6),
       child: Column(
         children: [
           ListTile(
             title: Text(comic.title),
             leading: GestureDetector(
-              onTap: (){
-
-                Navigator.pushNamed(context, 'detail', arguments: comic );
-
+              onTap: () async {
+                final comicFull = await comicsProvider.getComicById(comic.id);
+                Navigator.pushNamed(context, 'detail', arguments: comicFull );
               },
               child: CircleAvatar(
                 radius: 30,

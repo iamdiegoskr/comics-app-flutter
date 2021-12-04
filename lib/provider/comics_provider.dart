@@ -41,6 +41,7 @@ class ComicsProvider extends ChangeNotifier{
 
     final responseData = await _getJsonData('v1/public/comics');
     final comicsResponse = ComicsResponse.fromJson(responseData);
+    print(comicsResponse);
 
     listComics = comicsResponse.data.results;
     notifyListeners();
@@ -67,6 +68,20 @@ class ComicsProvider extends ChangeNotifier{
   }
 
 
+  Future<Comic> getComicById(int id)async{
+
+    var url = Uri.https(baseUrl, 'v1/public/comics/$id',{
+        'ts': ts,
+        'apikey': apikey,
+        'hash': hash
+    });
+
+    var response = await http.get(url);
+
+    ComicsResponse comicsResponse = ComicsResponse.fromJson(response.body);
+
+    return comicsResponse.data.results[0];
+  }
 
 
 

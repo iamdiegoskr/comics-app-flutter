@@ -1,4 +1,6 @@
-# comics_skr_app
+# Comics App
+
+![](https://i.imgur.com/9DnAenK.png)
 
 A new Flutter project.
 
